@@ -88,7 +88,7 @@ public class Model {
     }
 
     public boolean removeUser(String id) {
-        if(checkUser(id)) {
+        if(!checkUser(id)) {
             user.remove(id);
             return true;    
         }
@@ -105,7 +105,7 @@ public class Model {
     }
 
     public List sendUsersId() {
-        List<Object> ret = new ArrayList<>(user.keys());
+        List<Object> ret = new ArrayList<>(user.keySet());
         return ret;
     }
 }

@@ -7,32 +7,41 @@
    <div class="starter-template">
     	<h2> Remove User </h2>
     	<p id="status"></p>
-  		<form action="" method="POST" role="form">
-    		<div class="form-group">
+  		<div class="form-group">
       			<label for="id">Select Id to Remove</label>
-      			<select >
-    		</div>
+      			<select id="users" name="userid"></select>
+    	</div>
+      <button type="submit" class="btn btn-default">Submit</button>
+      <p id="status"></p>
    </div>	
- 	<script src="js/awesomeTable.js" type="text/javascript"></script>
+
  	<script>
+
  		$( document ).ready(function() {
- 			$.getJSON('/getusers',function(json){
-    			if ( json.length == 0 ) {
-        			console.log("NO DATA!");
-        			$(".userTable").text("No Users Found");
-    			}
-    			else {
-    				var tbl = new awesomeTableJs({
-						data:json,
-						tableWrapper:".userTable",
-						paginationWrapper:".paginationContainer",
-						buildPageSize: false,
-						buildSearch: false,
-					});
-					tbl.createTable();	
-    			}
-			});
- 			
-		});
+      var user = ${users};
+      var sel = $('#users');
+      $.each(user, function(key,val){
+        sel.append('<option value="' + val + '">' + val + '</option>');   
+      });
+      $("button").on("click", function(e) {
+        e.preventDefault();
+        var this_ = $(this);
+        var arr = $("#users").val();
+        // Ajax Call
+        console.log(arr);
+        $.ajax({
+            type: "PUT",
+            url: 'removeUser/' + arr,
+            success : function(e) {
+                $("#users option:selected").remove();
+                $("#status").text(e);
+            },
+            error : function(e) {
+                $("#status").text(e);
+            }
+        });
+        return false;
+    });
+    });
 	
 	</script>

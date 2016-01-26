@@ -92,10 +92,11 @@ public class MainClass {
            return new ModelAndView(viewObjects, "main.ftl");
         }, new FreeMarkerEngine());
 
-        put("/remove/:id", (request, response) -> {
-           Map<String, Object> viewObjects = new HashMap<String, Object>();
-           if(mod.removeUser(id)) return "User Removed";
-           else return "No Such User Found";
+        put("/removeUser/:id", (request, response) -> {
+            String id = request.params(":id");
+            Map<String, Object> viewObjects = new HashMap<String, Object>();
+            if(mod.removeUser(id)) return "User Removed";
+            else return "No Such User Found";
         });
         
         get("/updateUser", (request, response) -> {
