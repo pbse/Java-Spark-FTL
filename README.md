@@ -16,6 +16,8 @@ After this, visit -
 ```
 http://localhost:4567/
 ```
+### Test Cases
+Unit tests have been written. Test cases can be checked by compiling the code.
 
 ### Required Technologies
 * Maven
